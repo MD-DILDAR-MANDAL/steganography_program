@@ -9,7 +9,7 @@ def encode_message(image_path, message, output_path):
     #binary conversion
     binary_message = ''.join([format(ord(char), '08b') for char in message])
     # Add a delimiter to mark the end of the message
-    binary_message += '1111111111111110'  
+    binary_message += '11111110'  
 
     message_index = 0
     for row in np_image:
@@ -42,7 +42,7 @@ def decode_message(image_path):
     message = ''
     for i in range(0, len(binary_message), 8):
         byte = binary_message[i:i+8]
-        if byte == '1111111111111110':  # Check for the delimiter
+        if byte == '11111110':  # Check for the delimiter
             break
         if len(byte) == 8:
             message += chr(int(byte, 2))
@@ -55,8 +55,9 @@ def main():
  if(a==1):
   input_image_path = input("Enter the path to the input image: ")
   secret_message = input("Enter the message to be encoded: ")
-  encode_message(input_image_path, secret_message, output_image_path)
   output_image_path = input("Enter the path to output image: ")
+  encode_message(input_image_path, secret_message, output_image_path)
+
 
  if(a==2):
   output_image_path = input("Enter the path to output image: ")
